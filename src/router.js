@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import VueMeta from 'vue-meta'
 import Home from "@/views/Home";
 import Login from "@/views/Login";
-import permissions from "@/utils/permissionUtils";
+
 Vue.use(Router)
 Vue.use(VueMeta)
 
