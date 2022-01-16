@@ -1,20 +1,21 @@
 """project URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
 """
-from itertools import chain
 
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
 
-from .api.urls import urlpatterns as vue_api_urls
-from .user.urls import urlpatterns as user_urls
+from .api.views import index_view
 
-api_urlpatterns = list(chain.from_iterable([user_urls, vue_api_urls]))
+router = routers.DefaultRouter()
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("api/", include(api_urlpatterns)),
-    path("", include("backend.api.urls")),
+    # http://localhost:8000/
+    path("", index_view, name="index"),
+    # http://localhost:8000/api/<router-viewsets>
+    path("api/", include(router.urls)),
+    # http://localhost:8000/api/admin/
+    path("api/admin/", admin.site.urls),
 ]
