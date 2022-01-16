@@ -1,6 +1,12 @@
 <template>
   <div class="home">
-    <section class="hero is-primary is-bold is-relative">
+    <section
+      class="hero is-primary is-bold is-relative home-top"
+      :style="{
+        'background-image':
+          'url(' + require('../assets/pasmanteria.jpg') + ') ',
+      }"
+    >
       <div class="hero-body">
         <div class="container has-text-centered">
           <transition name="slide-down">
@@ -9,9 +15,7 @@
             </h1>
           </transition>
           <transition name="slide-up-200ms">
-            <h3 v-if="showElements" class="subtitle">
-              Vehicle Routing Problem with Time Windows
-            </h3>
+            <h3 v-if="showElements" class="subtitle"></h3>
           </transition>
         </div>
       </div>
@@ -20,12 +24,7 @@
           <div class="container">
             <div class="column is-12 has-text-centered">
               <transition name="slow-in-300ms">
-                <div v-if="showElements">
-                  <p class="is-unselectable">
-                    Version
-                    {{ tag !== "null" && tag_distance == 0 ? tag : hash }}
-                  </p>
-                </div>
+                <div v-if="showElements"></div>
               </transition>
             </div>
           </div>
@@ -38,78 +37,24 @@
         <div class="container has-text-centered">
           <div class="columns is-centered is-multiline is-mobile">
             <div class="column is-half-mobile has-text-centered">
-              <p class="title is-4 has-text-weight-semibold">Powerfull</p>
-              <p
-                class="subtitle is-6 has-text-grey-light"
-                v-html="
-                  'Control your routes with a single click'.replace(
-                    '<b>',
-                    '<b class=has-text-grey>'
-                  )
-                "
-              ></p>
+              <p class="title is-4 has-text-weight-semibold">
+                100% Satysfakcji
+              </p>
 
               <b-icon
                 size="is-medium"
-                type="is-danger"
-                icon="speedometer-medium"
+                type="is-gold"
+                icon="star-circle-outline"
               ></b-icon>
             </div>
 
             <div class="column is-half-mobile has-text-centered">
-              <p class="title is-4 has-text-weight-semibold">Intuitive</p>
-              <p
-                class="subtitle is-6 has-text-grey-light"
-                v-html="
-                  'Simple desing for busy people'.replace(
-                    '<b>',
-                    '<b class=has-text-grey>'
-                  )
-                "
-              ></p>
+              <p class="title is-4 has-text-weight-semibold">14 dni na zwrot</p>
 
               <b-icon
                 size="is-medium"
                 type="is-success"
-                icon="head-check-outline"
-              ></b-icon>
-            </div>
-
-            <div class="column is-half-mobile has-text-centered">
-              <p class="title is-4 has-text-weight-semibold">Modern</p>
-              <p
-                class="subtitle is-6 has-text-grey-light"
-                v-html="
-                  'Say goodbye to php-like look '.replace(
-                    '<b>',
-                    '<b class=has-text-grey>'
-                  )
-                "
-              ></p>
-
-              <b-icon
-                size="is-medium"
-                type="is-info"
-                icon="pencil-ruler"
-              ></b-icon>
-            </div>
-
-            <div class="column is-half-mobile has-text-centered">
-              <p class="title is-4 has-text-weight-semibold">Informative</p>
-              <p
-                class="subtitle is-6 has-text-grey-light"
-                v-html="
-                  'No details left unspoken'.replace(
-                    '<b>',
-                    '<b class=has-text-grey>'
-                  )
-                "
-              ></p>
-
-              <b-icon
-                size="is-medium"
-                type="is-warning"
-                icon="chart-scatter-plot-hexbin"
+                icon="calendar"
               ></b-icon>
             </div>
           </div>
@@ -145,6 +90,10 @@ export default {
 
 section.hero.is-primary {
   background-image: linear-gradient($primary, $secondary);
+}
+.home-top {
+  background-size: 100% auto;
+  height: 500px;
 }
 @keyframes disappear {
   0% {

@@ -132,6 +132,10 @@ $addColors: (
     $secondary,
     $secondary-invert,
   ),
+  "gold": (
+    $gold,
+    $gold-invert,
+  ),
 );
 
 $colors: map-merge($colors, $addColors);
