@@ -8,14 +8,15 @@ from django.urls import include, path
 from rest_framework import routers
 
 from .api.views import index_view
+from .user.urls import urlpatterns as user_urlpatterns
 
 router = routers.DefaultRouter()
 
 urlpatterns = [
     # http://localhost:8000/
     path("", index_view, name="index"),
-    # http://localhost:8000/api/<router-viewsets>
-    path("api/", include(router.urls)),
     # http://localhost:8000/api/admin/
     path("api/admin/", admin.site.urls),
 ]
+
+urlpatterns.extend(user_urlpatterns)
