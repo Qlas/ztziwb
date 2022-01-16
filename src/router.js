@@ -5,6 +5,7 @@ import Home from "@/views/Home";
 import About from "@/views/About";
 import Contact from "@/views/Contact";
 import Login from "@/views/Login";
+import Register from "@/views/Register";
 
 Vue.use(Router)
 Vue.use(VueMeta)
@@ -33,6 +34,12 @@ export default new Router({
       path: "/logowanie",
       name: "Logowanie",
       component: Login,
+      meta: { requiresAuth: false, requiresNoAuth: true, canBeOnFooter: true },
+    },
+    {
+      path: "/rejestracja",
+      name: "rejestracja",
+      component: Register,
       meta: { requiresAuth: false, requiresNoAuth: true, canBeOnFooter: true },
     },
   ]

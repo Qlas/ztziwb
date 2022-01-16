@@ -51,6 +51,10 @@
           <b-button tag="router-link" to="/logowanie" type="is-secondary">
             <strong>Zaloguj się</strong>
           </b-button>
+
+          <b-button tag="router-link" to="/rejestracja" type="is-dark">
+            <strong>Rejestracja</strong>
+          </b-button>
         </div>
       </b-navbar-item>
     </template>

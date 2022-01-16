@@ -31,6 +31,16 @@ const getters = {
 };
 
 const actions = {
+    register({ }, result) {
+        return new Promise((resolve, reject) => {
+            authService
+                .register(result)
+                .then(() => {
+                    resolve(result);
+                })
+                .catch((err) => reject(err));
+        });
+    },
     getTokenPair({ dispatch }, credentials) {
         return new Promise((resolve, reject) => {
             authService

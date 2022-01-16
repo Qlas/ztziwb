@@ -18,7 +18,8 @@
             :to="route.path"
             >{{
               route.meta.canBeOnFooter &&
-              (route.meta.requiresAuth ? isAuthenticated : true)
+              (route.meta.requiresAuth ? isAuthenticated : true) &&
+              (route.meta.requiresNoAuth ? !isAuthenticated : true)
                 ? route.name
                 : null
             }}</router-link
@@ -35,7 +36,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Footer",
   computed: {
-    ...mapGetters(["isAuthenticated"]),
+    ...mapGetters("auth", ["isAuthenticated"]),
   },
 };
 </script>

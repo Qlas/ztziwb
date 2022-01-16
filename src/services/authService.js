@@ -19,4 +19,8 @@ export default {
             })
             .then((response) => response.data);
     },
+
+    register(payload) {
+        return api.post(`register/`, payload).then((response) => response.data);
+    },
 };

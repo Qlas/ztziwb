@@ -4,6 +4,7 @@ import permissionUtils from "@/utils/permissionUtils";
 import Buefy from "buefy";
 import store from '@/store'
 import router from '@/router'
+import errorHandler from "@/error";
 import "./validation/rules";
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import ValidatedInput from "@/components/customInputs/validatedInput";
@@ -17,6 +18,7 @@ Vue.component("ValidationObserver", ValidationObserver);
 Vue.component(ValidatedInput.name, ValidatedInput);
 Vue.component(ValidatedSelect.name, ValidatedSelect);
 Vue.prototype.$permissions = permissionUtils;
+Vue.prototype.$errorHandler = errorHandler;
 
 
 const vue = new Vue({

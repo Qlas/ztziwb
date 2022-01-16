@@ -1,11 +1,14 @@
+from atexit import register
+
 from django.urls import include, path
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import ContactFormViewSet, CustomTokenObtainPairView, logout_view
+from .views import ContactFormViewSet, CustomTokenObtainPairView, UserRegisterViewSet, logout_view
 
 router = routers.DefaultRouter()
 router.register("contact_form", ContactFormViewSet)
+router.register("register", UserRegisterViewSet)
 urlpatterns = [
     path("api/", include(router.urls)),
     path("api/logout/", logout_view, name="logout_view"),

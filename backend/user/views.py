@@ -2,6 +2,7 @@ from collections import Counter
 
 import jwt
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -10,11 +11,16 @@ from rest_framework_simplejwt.tokens import OutstandingToken, RefreshToken, Slid
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import ContactForm
-from .serializers import ContactFormSerializer, CustomTokenObtainPairSerializer
+from .serializers import ContactFormSerializer, CustomTokenObtainPairSerializer, UserRegisterSerializer
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+
+
+class UserRegisterViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by("id")
+    serializer_class = UserRegisterSerializer
 
 
 class ContactFormViewSet(viewsets.ModelViewSet):
