@@ -2,6 +2,8 @@ from django.contrib.auth.models import Permission, User
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+from .models import ContactForm
+
 
 class UserSerializer(serializers.ModelSerializer):
     user_permissions = serializers.SlugRelatedField(many=True, read_only=True, slug_field="codename")
@@ -36,3 +38,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token["user"] = UserSerializer(user).data
 
         return token
+
+
+class ContactFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactForm
+        fields = "__all__"

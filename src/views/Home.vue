@@ -4,7 +4,9 @@
       <div class="hero-body">
         <div class="container has-text-centered">
           <transition name="slide-down">
-            <h1 v-if="showElements" class="title is-size-1 is-spaced">VRPTW</h1>
+            <h1 v-if="showElements" class="title is-size-1 is-spaced">
+              Dzianiny24
+            </h1>
           </transition>
           <transition name="slide-up-200ms">
             <h3 v-if="showElements" class="subtitle">

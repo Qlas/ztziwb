@@ -6,42 +6,26 @@
   >
     <template slot="brand">
       <b-navbar-item :to="{ path: '/' }" tag="router-link">
-        <b-icon :style="{ margin: '6px' }" icon="account-hard-hat"></b-icon>
+        <b-icon :style="{ margin: '6px' }" icon="clover"></b-icon>
         <transition name="slide-left">
           <p
             v-if="$route.path !== '/'"
             class="subtitle is-5 is-unselectable has-spacing no-wrap"
             style="color: white"
           >
-            VRPTW
+            Dzianiny24
           </p>
         </transition>
       </b-navbar-item>
     </template>
     <template slot="start">
-      <b-navbar-item
-        :to="{ path: '/results' }"
-        tag="router-link"
-        v-if="isAuthenticated"
-      >
-        <b-icon :style="{ margin: '6px' }" icon="view-list-outline" />
-        <p class="is-unselectable">Results</p>
+      <b-navbar-item :to="{ path: '/o-nas' }" tag="router-link">
+        <b-icon :style="{ margin: '6px' }" icon="information-outline" />
+        <p class="is-unselectable">O nas</p>
       </b-navbar-item>
-      <b-navbar-item
-        :to="{ path: '/calculate' }"
-        tag="router-link"
-        v-if="isAuthenticated"
-      >
-        <b-icon :style="{ margin: '6px' }" icon="calculator" />
-        <p class="is-unselectable">Calculate</p>
-      </b-navbar-item>
-      <b-navbar-item
-        :to="{ path: '/clients' }"
-        tag="router-link"
-        v-if="isAuthenticated && $permissions.client.any(authUser)"
-      >
-        <b-icon :style="{ margin: '6px' }" icon="human-edit" />
-        <p class="is-unselectable">Clients</p>
+      <b-navbar-item :to="{ path: '/kontakt' }" tag="router-link">
+        <b-icon :style="{ margin: '6px' }" icon="message-text-outline" />
+        <p class="is-unselectable">Kontakt</p>
       </b-navbar-item>
     </template>
 
@@ -64,8 +48,8 @@
       </b-dropdown>
       <b-navbar-item v-else tag="div">
         <div class="buttons">
-          <b-button tag="router-link" to="/login" type="is-secondary">
-            <strong>Sign in</strong>
+          <b-button tag="router-link" to="/logowanie" type="is-secondary">
+            <strong>Zaloguj się</strong>
           </b-button>
         </div>
       </b-navbar-item>

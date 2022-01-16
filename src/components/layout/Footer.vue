@@ -4,9 +4,9 @@
       <div class="level-right">
         <div>
           <div class="level-item">
-            <img src="@/assets/logo.png" :style="{ maxHeight: '70px' }" />
-            <p style="margin-left: 20px">
-              <router-link to="/"><strong>VRPTW</strong></router-link>
+            <b-icon icon="clover" size="is-medium" type="is-dark"></b-icon>
+            <p style="margin-left: 10px">
+              <router-link to="/"><strong>Dzianiny24</strong></router-link>
             </p>
           </div>
         </div>
