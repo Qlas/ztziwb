@@ -174,7 +174,7 @@ export default {
   },
 
   created() {
-    this.getCategories();
+    this.getCategories({ show_main: false });
   },
 };
 </script>

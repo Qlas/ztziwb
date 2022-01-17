@@ -13,7 +13,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        queryset = queryset.filter(is_main=True)
+        show_main = request.query_params.get("show_main", "true")
+        if show_main == "true":
+            queryset = queryset.filter(is_main=True)
         serializer = self.get_serializer(
             queryset,
             many=True,
