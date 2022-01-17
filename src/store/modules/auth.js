@@ -31,7 +31,7 @@ const getters = {
 };
 
 const actions = {
-    register({ }, result) {
+    register({ commit }, result) {
         return new Promise((resolve, reject) => {
             authService
                 .register(result)

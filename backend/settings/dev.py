@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
     "backend.user",
+    "backend.product",
     "backend.api",
 ]
 
@@ -163,3 +164,6 @@ SIMPLE_JWT = {
         "rest_framework_simplejwt.tokens.SlidingToken",
     ),
 }
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"

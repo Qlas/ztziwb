@@ -27,6 +27,14 @@
         <b-icon :style="{ margin: '6px' }" icon="message-text-outline" />
         <p class="is-unselectable">Kontakt</p>
       </b-navbar-item>
+      <b-navbar-item :to="{ path: '/sklep' }" tag="router-link">
+        <b-icon :style="{ margin: '6px' }" icon="basket-outline" />
+        <p class="is-unselectable">Sklep</p>
+      </b-navbar-item>
+      <b-navbar-item :to="{ path: '/zarzadzanie' }" tag="router-link">
+        <b-icon :style="{ margin: '6px' }" icon="basket-outline" />
+        <p class="is-unselectable">Zarządzanie</p>
+      </b-navbar-item>
     </template>
 
     <template slot="end">
