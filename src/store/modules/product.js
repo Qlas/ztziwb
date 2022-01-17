@@ -22,6 +22,17 @@ const actions = {
         .catch((err) => reject(err));
     });
   },
+
+  addProduct({ commit }, result) {
+    return new Promise((resolve, reject) => {
+      productService
+        .postProduct(result)
+        .then(() => {
+          resolve(result);
+        })
+        .catch((err) => reject(err));
+    });
+  },
 };
 
 const mutations = {

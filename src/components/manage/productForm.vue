@@ -16,7 +16,7 @@
             maxlength="255"
             :validation="{
               name: 'Nazwa',
-              rules: 'required|alpha_dash',
+              rules: 'required',
             }"
             :field="{ label: 'Nazwa', expanded: true }"
           />
@@ -29,6 +29,18 @@
             :validation="{ name: 'Opis', rules: 'required' }"
             :field="{ label: 'Opis', expanded: true }"
           />
+
+          <b-field label="Kategoria">
+            <b-select placeholder="Wybierz kategorie" v-model="category">
+              <option
+                v-for="option in categories"
+                :value="option.name"
+                :key="option.id"
+              >
+                {{ option.name }}
+              </option>
+            </b-select>
+          </b-field>
 
           <ValidatedInput
             inputType="b-numberinput"
@@ -52,33 +64,16 @@
             :field="{ label: 'Liczba sztuk' }"
           />
 
-          <b-field>
-            <b-upload v-model="dropFiles" multiple drag-drop>
-              <section class="section">
-                <div class="content has-text-centered">
-                  <p>
-                    <b-icon icon="upload" size="is-large"> </b-icon>
-                  </p>
-                  <p>Drop your files here or click to upload</p>
-                </div>
-              </section>
-            </b-upload>
-          </b-field>
-
-          <div class="tags">
-            <span
-              v-for="(file, index) in dropFiles"
-              :key="index"
-              class="tag is-primary"
-            >
-              {{ file.name }}
-              <button
-                class="delete is-small"
-                type="button"
-                @click="deleteDropFile(index)"
-              ></button>
-            </span>
-          </div>
+          <ValidatedInput
+            inputType="url"
+            v-model="image"
+            min="0"
+            step="1"
+            :validation="{
+              rules: 'required|url',
+            }"
+            :field="{ label: 'Zdjęcie' }"
+          />
         </section>
         <footer class="modal-card-foot">
           <button class="button" type="button" @click="$parent.close()">
@@ -107,32 +102,36 @@ export default {
       name: this.currentData ? this.currentData.name : "",
       description: this.currentData ? this.currentData.description : "",
       cost: this.currentData ? this.currentData.cost : {},
-      time: this.currentData ? this.currentData.time : {},
       price: this.currentData ? this.currentData.name : 0,
       quantity: this.currentData ? this.currentData.quantity : 0,
-      dropFiles: [],
+      image: this.currentData ? this.currentData.image : "",
+      category: this.currentData ? this.currentData.category : "",
     };
   },
 
   methods: {
-    ...mapActions("clients", ["getClients", "addClient", "updateClient"]),
+    ...mapActions("product", ["addProduct"]),
+    ...mapActions("product", ["getProducts"]),
+    ...mapActions("menu", ["getCategories"]),
 
     deleteDropFile(index) {
       this.dropFiles.splice(index, 1);
     },
 
     processForm() {
-      console.log(this.dropFiles);
-      return;
       const processFormAction = this.currentData
         ? this.updateClient
-        : this.addClient;
+        : this.addProduct;
 
       let requestData = {
         name: this.name,
         description: this.description,
         cost: this.cost,
         time: this.time,
+        price: this.price,
+        quantity: this.quantity,
+        image: this.image,
+        category: this.category,
       };
 
       if (this.currentData) {
@@ -151,11 +150,12 @@ export default {
 
       const toastMessage = this.currentData
         ? `Updated ${this.name} Client`
-        : "Added a new Client";
+        : "Dodano nowy produkt";
 
       processFormAction(requestData)
         .then(() => {
           this.$parent.close();
+          this.getProducts();
           this.$buefy.toast.open({
             message: toastMessage,
             position: "is-top",
@@ -170,7 +170,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters("product", ["products"]),
+    ...mapGetters("menu", ["categories"]),
+  },
+
+  created() {
+    this.getCategories();
   },
 };
 </script>
