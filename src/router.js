@@ -8,6 +8,7 @@ import Login from "@/views/Login";
 import Register from "@/views/Register";
 import Shop from "@/views/Shop";
 import Manage from "@/views/Manage";
+import ManageCategory from "@/views/ManageCategory";
 
 Vue.use(Router);
 Vue.use(VueMeta);
@@ -43,9 +44,15 @@ export default new Router({
       meta: { requiresAuth: false, requiresNoAuth: false, canBeOnFooter: true },
     },
     {
-      path: "/zarzadzanie",
-      name: "Zarzadzanie",
+      path: "/zarzadzanie/produkt",
+      name: "Zarzadzanie Produktem",
       component: Manage,
+      meta: { requiresAuth: true, requiresNoAuth: false, canBeOnFooter: false },
+    },
+    {
+      path: "/zarzadzanie/kategoria",
+      name: "Zarzadzanie Kategorią",
+      component: ManageCategory,
       meta: { requiresAuth: true, requiresNoAuth: false, canBeOnFooter: false },
     },
     {

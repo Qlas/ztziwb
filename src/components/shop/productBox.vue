@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <div>
-      <figure class="image">
+      <figure class="image" style="height: 210px">
         <img
           :src="
             product.image

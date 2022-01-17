@@ -1,6 +1,6 @@
 <template>
   <b-menu-item
-    :label="item.name"
+    :label="item.name + ' (' + item.products_count + ')'"
     @click="clickMethod"
     :active="item.name === activeMenu"
   >
@@ -8,7 +8,7 @@
       :item="item"
       v-for="(item, index) in item.sub_category"
       :key="index"
-      v-if="item.sub_category"
+      v-if="item.sub_category && item.products_count > 0"
     />
   </b-menu-item>
 </template>

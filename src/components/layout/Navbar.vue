@@ -31,10 +31,19 @@
         <b-icon :style="{ margin: '6px' }" icon="basket-outline" />
         <p class="is-unselectable">Sklep</p>
       </b-navbar-item>
-      <b-navbar-item :to="{ path: '/zarzadzanie' }" tag="router-link">
-        <b-icon :style="{ margin: '6px' }" icon="basket-outline" />
-        <p class="is-unselectable">Zarządzanie</p>
-      </b-navbar-item>
+      <b-navbar-dropdown label="Zarządzanie" v-if="isAuthenticated">
+        <b-navbar-item :to="{ path: '/zarzadzanie/produkt' }" tag="router-link">
+          <b-icon :style="{ margin: '6px' }" icon="basket-outline" />
+          <p class="is-unselectable">Produkt</p>
+        </b-navbar-item>
+        <b-navbar-item
+          :to="{ path: '/zarzadzanie/kategoria' }"
+          tag="router-link"
+        >
+          <b-icon :style="{ margin: '6px' }" icon="basket-outline" />
+          <p class="is-unselectable">Kategoria</p>
+        </b-navbar-item>
+      </b-navbar-dropdown>
     </template>
 
     <template slot="end">

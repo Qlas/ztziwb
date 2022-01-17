@@ -26,6 +26,17 @@ const actions = {
         .catch((err) => reject(err));
     });
   },
+
+  addCategory({ commit }, result) {
+    return new Promise((resolve, reject) => {
+      menuService
+        .postCategory(result)
+        .then(() => {
+          resolve(result);
+        })
+        .catch((err) => reject(err));
+    });
+  },
 };
 
 const mutations = {
