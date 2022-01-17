@@ -130,8 +130,9 @@ MIDDLEWARE_CLASSES = ("whitenoise.middleware.WhiteNoiseMiddleware",)
 
 STATIC_URL = "/static/"
 # Place static in the same location as webpack build files
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATIC_ROOT = os.path.join(BASE_DIR, "dist", "static")
+STATICFILES_DIRS = []
+
 
 ##########
 # STATIC #
@@ -164,5 +165,5 @@ SIMPLE_JWT = {
     ),
 }
 
-MEDIA_URL = "api/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "api/media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
