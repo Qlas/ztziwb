@@ -9,6 +9,7 @@ import Register from "@/views/Register";
 import Shop from "@/views/Shop";
 import Manage from "@/views/Manage";
 import ManageCategory from "@/views/ManageCategory";
+import productDetails from "@/views/productDetails";
 
 Vue.use(Router);
 Vue.use(VueMeta);
@@ -66,6 +67,12 @@ export default new Router({
       name: "rejestracja",
       component: Register,
       meta: { requiresAuth: false, requiresNoAuth: true, canBeOnFooter: true },
+    },
+    {
+      path: "/szczegoly/:name",
+      name: "szczegoly",
+      component: productDetails,
+      meta: { requiresAuth: true, requiresNoAuth: false, canBeOnFooter: false },
     },
   ],
 });
