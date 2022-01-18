@@ -37,6 +37,28 @@ const actions = {
         .catch((err) => reject(err));
     });
   },
+
+  updateCategory({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      menuService
+        .putCategory(data)
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => reject(err));
+    });
+  },
+
+  removeCategory({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      menuService
+        .deleteCategory(data)
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => reject(err));
+    });
+  },
 };
 
 const mutations = {

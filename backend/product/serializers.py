@@ -2,7 +2,7 @@ from nis import cat
 
 from rest_framework import serializers
 
-from .models import Category, Product
+from .models import Cart, CartProduct, Category, Product
 
 
 def get_product_count(category):
@@ -14,8 +14,6 @@ def get_product_count(category):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    parent_category = serializers.SlugRelatedField(slug_field="name", queryset=Category.objects.all())
-
     class Meta:
         model = Category
         fields = "__all__"
@@ -37,4 +35,32 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
+        fields = "__all__"
+
+
+class CartProductSerializer(serializers.ModelSerializer):
+    product = serializers.SlugRelatedField(slug_field="name", queryset=Product.objects.all())
+    price = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
+    max_quantity = serializers.SerializerMethodField()
+
+    def get_price(self, instance):
+        return instance.product.price
+
+    def get_image(self, instance):
+        return instance.product.image
+
+    def get_max_quantity(self, instance):
+        return instance.product.quantity
+
+    class Meta:
+        model = CartProduct
+        fields = "__all__"
+
+
+class CartSerializer(serializers.ModelSerializer):
+    cart_product = CartProductSerializer(many=True)
+
+    class Meta:
+        model = Cart
         fields = "__all__"

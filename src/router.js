@@ -10,6 +10,7 @@ import Shop from "@/views/Shop";
 import Manage from "@/views/Manage";
 import ManageCategory from "@/views/ManageCategory";
 import productDetails from "@/views/productDetails";
+import CartDashboard from "@/views/CartDashboard";
 
 Vue.use(Router);
 Vue.use(VueMeta);
@@ -72,7 +73,21 @@ export default new Router({
       path: "/szczegoly/:name",
       name: "szczegoly",
       component: productDetails,
-      meta: { requiresAuth: true, requiresNoAuth: false, canBeOnFooter: false },
+      meta: {
+        requiresAuth: false,
+        requiresNoAuth: false,
+        canBeOnFooter: false,
+      },
+    },
+    {
+      path: "/koszyk",
+      name: "Koszyk",
+      component: CartDashboard,
+      meta: {
+        requiresAuth: false,
+        requiresNoAuth: false,
+        canBeOnFooter: false,
+      },
     },
   ],
 });

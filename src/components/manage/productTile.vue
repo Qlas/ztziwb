@@ -5,10 +5,10 @@
         <div class="column">
           <div class="columns is-vcentered">
             <div class="column is-1 group-options"></div>
-            <div class="column is-3">
+            <div class="column is-5">
               <h2>{{ name }}</h2>
             </div>
-            <div class="column is-offset-4">
+            <div class="column">
               <b-field grouped>
                 <div class="control tl-count-tag">
                   <b-taglist attached>
@@ -25,20 +25,40 @@
                 </div>
               </b-field>
             </div>
+            <div class="column is-1">
+              <b-button type="is-warning" @click="() => editClicked(name)"
+                >Edytuj</b-button
+              >
+            </div>
+            <div class="column is-1">
+              <b-button type="is-danger" @click="() => removeClicked(id)"
+                >Usuń</b-button
+              >
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <b-modal
+      :active.sync="isProductModalActive"
+      has-modal-card
+      trap-focus
+      aria-role="dialog"
+      aria-modal
+    >
+      <productForm :currentData="ProductEdit" />
+    </b-modal>
   </div>
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import productForm from "@/components/manage/productForm.vue";
+import { mapActions, mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "ProductTile",
 
-  components: {},
+  components: { productForm },
 
   props: [
     "id",
@@ -51,11 +71,29 @@ export default {
     "price",
   ],
   data() {
-    return {};
+    return { isProductModalActive: false, ProductEdit: {} };
+  },
+  computed: {
+    ...mapGetters("product", ["products"]),
   },
   methods: {
+    ...mapActions("product", ["removeProduct", "getProducts"]),
     padInt(value) {
       return value.toString().padStart(2, "0");
+    },
+    editClicked(name) {
+      this.isProductModalActive = true;
+      for (var product of this.products) {
+        if (product.name === name) {
+          this.ProductEdit = product;
+        }
+      }
+    },
+
+    removeClicked(id) {
+      this.removeProduct(id).then(() => {
+        this.getProducts();
+      });
     },
   },
 };

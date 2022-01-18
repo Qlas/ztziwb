@@ -10,18 +10,38 @@
             </div>
           </div>
         </div>
+        <div class="column is-1">
+          <b-button type="is-warning" @click="() => editClicked(name)"
+            >Edytuj</b-button
+          >
+        </div>
+        <div class="column is-1">
+          <b-button type="is-danger" @click="() => removeClicked(id)"
+            >Usuń</b-button
+          >
+        </div>
       </div>
     </div>
+    <b-modal
+      :active.sync="isCategoryModalActive"
+      has-modal-card
+      trap-focus
+      aria-role="dialog"
+      aria-modal
+    >
+      <categoryForm :currentData="CategoryEdit" />
+    </b-modal>
   </div>
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapGetters } from "vuex";
+import categoryForm from "@/components/manageCategory/categoryForm.vue";
 
 export default {
   name: "CategoryTile",
 
-  components: {},
+  components: { categoryForm },
 
   props: [
     "id",
@@ -34,11 +54,29 @@ export default {
     "price",
   ],
   data() {
-    return {};
+    return { isCategoryModalActive: false, CategoryEdit: {} };
+  },
+  computed: {
+    ...mapGetters("menu", ["categories"]),
   },
   methods: {
+    ...mapActions("menu", ["removeCategory", "getCategories"]),
     padInt(value) {
       return value.toString().padStart(2, "0");
+    },
+
+    editClicked(name) {
+      this.isCategoryModalActive = true;
+      for (var category of this.categories) {
+        if (category.name === name) {
+          this.CategoryEdit = category;
+        }
+      }
+    },
+    removeClicked(id) {
+      this.removeCategory(id).then(() => {
+        this.getCategories();
+      });
     },
   },
 };

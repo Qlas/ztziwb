@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -32,3 +33,30 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name}"
+
+
+class Cart(models.Model):
+    STATUS_CHOICES = [
+        ("done", "done"),
+        ("payment", "payment"),
+        ("open", "open"),
+    ]
+    user = models.ForeignKey(User, related_name="carts", on_delete=models.SET_NULL, blank=True, null=True)
+    status = models.CharField(
+        max_length=7,
+        choices=STATUS_CHOICES,
+        default="open",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class CartProduct(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="cart_product")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f"{self.cart.user} - {self.cart.status} - {self.product.name} - {self.quantity}"

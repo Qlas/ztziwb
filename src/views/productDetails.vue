@@ -20,6 +20,26 @@
               </div>
               <div class="tile is-6">
                 <div class="tile is-vertical is-12">
+                  <div style="width: 40%; margin-left: 210px">
+                    <b-field>
+                      <b-numberinput
+                        expanded
+                        controls-position="compact"
+                        controls-alignment="left"
+                        min="0"
+                        :max="product.quantity"
+                        :disabled="product.quantity === 0"
+                        v-model="quantity"
+                      />
+                      <p class="control ml-1">
+                        <b-button
+                          label="Do koszyka"
+                          :disabled="product.quantity === 0 || quantity === 0"
+                          @click="addToButton"
+                        />
+                      </p>
+                    </b-field>
+                  </div>
                   <div class="panel-block is-justify-content-space-between">
                     <div class="is-pulled-left">
                       <strong class="bold">Cena:</strong>
@@ -57,9 +77,9 @@ export default {
   data() {
     return {
       product: {},
+      quantity: 1,
     };
   },
-  computed: {},
 
   watch: {
     $route: {
@@ -74,6 +94,8 @@ export default {
 
   methods: {
     ...mapActions("product", ["getProducts"]),
+    ...mapActions("cartProduct", ["addProductToCart"]),
+    ...mapActions("cart", ["getCart"]),
     fetchTestlineData() {
       this.getProducts().then(() => {
         for (var product of this.products) {
@@ -83,6 +105,28 @@ export default {
           }
         }
       });
+    },
+
+    addToButton() {
+      this.addProductToCart({
+        product: this.product.name,
+        quantity: this.quantity,
+      })
+        .then(() => {
+          this.$buefy.toast.open({
+            message: "Dodano produkt do koszyka",
+            type: "is-success",
+          });
+          this.quantity = 0;
+          this.getCart();
+        })
+        .catch(() => {
+          this.$buefy.toast.open({
+            message: "Przekroczono maksymalną liczbę dostepnych produktów",
+            type: "is-danger",
+          });
+          this.quantity = 0;
+        });
     },
   },
 

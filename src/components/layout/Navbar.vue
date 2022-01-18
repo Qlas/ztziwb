@@ -47,6 +47,69 @@
     </template>
 
     <template slot="end">
+      <b-navbar-dropdown arrowless style="color: black" v-if="isAuthenticated">
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title has-text-centered">Twój koszyk</p>
+          </header>
+          <section class="modal-card-body">
+            <div
+              class="has-text-centered"
+              v-if="
+                cart === undefined ||
+                (cart.cart_product !== undefined &&
+                  cart.cart_product.length == 0)
+              "
+            >
+              Twój koszyk jest pusty
+            </div>
+            <div
+              v-for="cart_product in cart.cart_product"
+              :key="cart_product.id"
+              class="box"
+            >
+              <div>
+                <div class="columns">
+                  <div
+                    class="column is-2"
+                    style="display: flex; align-items: center"
+                  >
+                    <figure class="image">
+                      <img :src="cart_product.image" alt="Placeholder image" />
+                    </figure>
+                  </div>
+                  <div
+                    class="column"
+                    style="display: flex; align-items: center"
+                  >
+                    <p class="title is-6">{{ cart_product.product }}</p>
+                  </div>
+                  <div
+                    class="column is-2"
+                    style="display: flex; align-items: center"
+                  >
+                    <p class="title is-6">{{ cart_product.quantity }}</p>
+                  </div>
+                  <div
+                    class="column is-2"
+                    style="display: flex; align-items: center"
+                  >
+                    <b-button
+                      @click="() => removeButtonClicked(cart_product.product)"
+                      >Usuń</b-button
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <b-button class="is-secondary" tag="router-link" to="/koszyk"
+              >Przejdź do koszyka</b-button
+            >
+          </section>
+        </div>
+
+        <template slot="label">Koszyk: {{ padInt(cartValue) }}</template>
+      </b-navbar-dropdown>
       <b-dropdown :triggers="['hover']" v-if="isAuthenticated">
         <button class="button is-primary" slot="trigger">
           <b-icon icon="account"></b-icon>
@@ -87,10 +150,12 @@ export default {
 
   computed: {
     ...mapGetters("auth", ["isAuthenticated", "authUser"]),
+    ...mapGetters("cart", ["cartValue", "cart"]),
   },
 
   methods: {
     ...mapActions("auth", ["endAuthSession"]),
+    ...mapActions("cart", ["getCart", "removeCartProduct"]),
 
     logout() {
       this.endAuthSession();
@@ -103,6 +168,23 @@ export default {
         hasIcon: true,
       });
     },
+
+    removeButtonClicked(product) {
+      this.removeCartProduct({
+        id: this.cart.id,
+        payload: { product: product },
+      }).then(() => {
+        this.getCart();
+      });
+    },
+
+    padInt(value) {
+      return value.toString() + " zł";
+    },
+  },
+
+  created() {
+    this.getCart();
   },
 };
 </script>

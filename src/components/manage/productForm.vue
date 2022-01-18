@@ -102,7 +102,7 @@ export default {
       name: this.currentData ? this.currentData.name : "",
       description: this.currentData ? this.currentData.description : "",
       cost: this.currentData ? this.currentData.cost : {},
-      price: this.currentData ? this.currentData.name : 0,
+      price: this.currentData ? parseFloat(this.currentData.price) : 0,
       quantity: this.currentData ? this.currentData.quantity : 0,
       image: this.currentData ? this.currentData.image : "",
       category: this.currentData ? this.currentData.category : "",
@@ -110,7 +110,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("product", ["addProduct"]),
+    ...mapActions("product", ["addProduct", "updateProduct"]),
     ...mapActions("product", ["getProducts"]),
     ...mapActions("menu", ["getCategories"]),
 
@@ -120,7 +120,7 @@ export default {
 
     processForm() {
       const processFormAction = this.currentData
-        ? this.updateClient
+        ? this.updateProduct
         : this.addProduct;
 
       let requestData = {
@@ -142,8 +142,12 @@ export default {
               description: this.description,
               cost: this.cost,
               time: this.time,
+              price: this.price,
+              quantity: this.quantity,
+              image: this.image,
+              category: this.category,
             },
-            clientId: this.currentData.id,
+            productId: this.currentData.id,
           },
         };
       }

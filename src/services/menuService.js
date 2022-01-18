@@ -7,4 +7,14 @@ export default {
   postCategory(payload) {
     return api.post(`category/`, payload).then((response) => response.data);
   },
+  putCategory(update) {
+    return api
+      .put(`category/${update.update.categoryId}/`, update.update.payload)
+      .then((response) => response.data);
+  },
+  deleteCategory(categoryId) {
+    return api
+      .delete(`category/${categoryId}/`)
+      .then((response) => response.data);
+  },
 };

@@ -33,6 +33,28 @@ const actions = {
         .catch((err) => reject(err));
     });
   },
+
+  updateProduct({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      productService
+        .putProduct(data)
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => reject(err));
+    });
+  },
+
+  removeProduct({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      productService
+        .deleteProduct(data)
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => reject(err));
+    });
+  },
 };
 
 const mutations = {

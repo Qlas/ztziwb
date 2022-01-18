@@ -70,7 +70,7 @@ export default {
   methods: {
     ...mapActions("product", ["addProduct"]),
     ...mapActions("product", ["getProducts"]),
-    ...mapActions("menu", ["getCategories", "addCategory"]),
+    ...mapActions("menu", ["getCategories", "addCategory", "updateCategory"]),
 
     deleteDropFile(index) {
       this.dropFiles.splice(index, 1);
@@ -78,7 +78,7 @@ export default {
 
     processForm() {
       const processFormAction = this.currentData
-        ? this.updateClient
+        ? this.updateCategory
         : this.addCategory;
 
       let requestData = {
@@ -93,11 +93,11 @@ export default {
           update: {
             payload: {
               name: this.name,
-              description: this.description,
-              cost: this.cost,
-              time: this.time,
+              is_main: this.category === "",
+              parent_category: this.category ? this.category : null,
+              sub_category: null,
             },
-            clientId: this.currentData.id,
+            categoryId: this.currentData.id,
           },
         };
       }

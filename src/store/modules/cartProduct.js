@@ -1,16 +1,15 @@
-import contactFormService from "@/services/contactFormService";
+import cartProductService from "@/services/cartProductService";
 
 const state = {};
 
 const getters = {};
 
 const actions = {
-  sendForm({ commit }, result) {
+  addProductToCart({ commit }, result) {
     return new Promise((resolve, reject) => {
-      contactFormService
-        .postContactForm(result)
+      cartProductService
+        .postCartProduct(result)
         .then(() => {
-          commit("sendForm", result);
           resolve(result);
         })
         .catch((err) => reject(err));
@@ -18,11 +17,7 @@ const actions = {
   },
 };
 
-const mutations = {
-  sendForm(state, results) {
-    return;
-  },
-};
+const mutations = {};
 
 export default {
   namespaced: true,
