@@ -74,8 +74,8 @@ class CartViewSet(viewsets.ModelViewSet):
     @action(methods=["patch"], detail=True)
     def change_product_quantity(self, request, pk=None):
         product = self.get_object().cart_product.filter(product__name=request.data["product"]).first()
-        if product and product.product.quantity < product.quantity + request.data["quantity"]:
-            return Response(status=500)
+        if product and product.product.quantity < request.data["quantity"]:
+            return Response(status=400)
         product.quantity = request.data["quantity"]
         product.save()
         return Response()
@@ -100,7 +100,7 @@ class CartProductViewSet(viewsets.ModelViewSet):
 
         product = cart.cart_product.filter(product__name=request.data["product"]).first()
         if product and product.product.quantity < product.quantity + request.data["quantity"]:
-            return Response(status=500)
+            return Response(status=400)
         if product:
             product.quantity += request.data["quantity"]
             product.save()

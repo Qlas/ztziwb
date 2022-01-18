@@ -150,7 +150,7 @@ export default {
     },
 
     valueChanged(name, quantity, cart_product) {
-      if (quantity >= cart_product.max_quantity) {
+      if (quantity > cart_product.max_quantity) {
         cart_product.quantity = cart_product.max_quantity;
         return;
       }
