@@ -58,7 +58,7 @@ class CartViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        queryset = queryset.filter(user=request.user)
+        queryset = queryset.filter(user=request.user).filter(status__in=("open", "payment"))
         serializer = self.get_serializer(
             queryset,
             many=True,
@@ -80,13 +80,20 @@ class CartViewSet(viewsets.ModelViewSet):
         product.save()
         return Response()
 
+    @action(methods=["patch"], detail=True)
+    def end_cart(self, request, pk=None):
+        cart = self.get_object()
+        cart.status = "end"
+        cart.save()
+        return Response()
+
 
 class CartProductViewSet(viewsets.ModelViewSet):
     queryset = CartProduct.objects.all().order_by("id")
     serializer_class = CartProductSerializer
 
     def create(self, request):
-        cart = request.user.carts.filter(status__in=("open", "payment")).first()
+        cart = request.user.carts.filter(user=request.user).filter(status__in=("open", "payment")).first()
         if not cart:
             cart = Cart.objects.create(user=request.user)
         request.data["cart"] = cart.id

@@ -55,6 +55,17 @@ const actions = {
         .catch((err) => reject(err));
     });
   },
+
+  CloseCart({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      cartService
+        .EndCart(data)
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => reject(err));
+    });
+  },
 };
 
 const mutations = {

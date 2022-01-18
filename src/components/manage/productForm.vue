@@ -153,7 +153,7 @@ export default {
       }
 
       const toastMessage = this.currentData
-        ? `Updated ${this.name} Client`
+        ? `Zaktualizowano ${this.name}`
         : "Dodano nowy produkt";
 
       processFormAction(requestData)

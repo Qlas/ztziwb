@@ -14,4 +14,10 @@ export default {
       .patch(`cart/${data.id}/change_product_quantity/`, data.payload)
       .then((response) => response.data);
   },
+
+  EndCart(data) {
+    return api
+      .patch(`cart/${data.id}/end_cart/`)
+      .then((response) => response.data);
+  },
 };

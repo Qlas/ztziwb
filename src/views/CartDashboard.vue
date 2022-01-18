@@ -74,7 +74,18 @@
             {{ padInt(deliverycartValue) }}
           </div>
         </div>
-        <b-button type="is-success" expanded class="mt-5">Zamów</b-button>
+        <b-button
+          type="is-success"
+          expanded
+          class="mt-5"
+          @click="subButtonClicked"
+          :disabled="
+            cart === undefined ||
+            cart.cart_product === undefined ||
+            cart.cart_product.length == 0
+          "
+          >Zamów</b-button
+        >
       </div>
     </div>
   </div>
@@ -117,7 +128,7 @@ export default {
     ...mapActions("product", ["getProducts"]),
     ...mapActions("cartProduct", ["addProductToCart"]),
     ...mapActions("cart", ["getCart", "changeProduct"]),
-    ...mapActions("cart", ["getCart", "removeCartProduct"]),
+    ...mapActions("cart", ["getCart", "removeCartProduct", "CloseCart"]),
     fetchTestlineData() {
       this.getProducts().then(() => {
         for (var product of this.products) {
@@ -149,6 +160,10 @@ export default {
       }).then(() => {
         this.getCart();
       });
+    },
+
+    subButtonClicked() {
+      this.CloseCart({ id: this.cart.id });
     },
 
     padInt(value) {
