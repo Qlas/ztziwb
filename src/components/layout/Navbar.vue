@@ -114,7 +114,7 @@
                 </div>
               </div>
             </div>
-            <b-button class="is-secondary" tag="router-link" to="/koszyk"
+            <b-button class="is-secondary mt-4" tag="router-link" to="/koszyk"
               >Przejdź do koszyka</b-button
             >
           </section>
