@@ -61,16 +61,31 @@
         </div>
       </div>
     </section>
+    <div class="title has-text-centered">Nowości</div>
+    <div class="container">
+      <b-carousel-list
+        :data="products"
+        :arrow="true"
+        :arrow-hover="false"
+        :items-to-show="3"
+      >
+        <template #item="list">
+          <productBox :product="list" />
+        </template>
+      </b-carousel-list>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import productBox from "@/components/shop/productBox.vue";
 
 export default {
-  components: {},
+  components: { productBox },
   computed: {
     ...mapGetters("auth", ["isAuthenticated", "authUser"]),
+    ...mapGetters("product", ["products"]),
   },
   data() {
     return {
@@ -80,8 +95,13 @@ export default {
       tag_distance: process.env.VUE_APP_GIT_DISTANCE,
     };
   },
+
+  methods: {
+    ...mapActions("product", ["getProducts"]),
+  },
   mounted() {
     this.showElements = true;
+    this.getProducts({ latest: true });
   },
 };
 </script>

@@ -40,9 +40,12 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         search = request.query_params.get("search", None)
+        latest = request.query_params.get("latest", None)
         if search:
             category = Category.objects.get(name=search)
             data = get_all_products(category)
+        elif latest:
+            data = Product.objects.order_by("created_at")[:10]
         else:
             data = self.get_queryset()
         serializer = self.get_serializer(

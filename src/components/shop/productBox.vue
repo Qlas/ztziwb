@@ -1,8 +1,11 @@
 <template>
-  <div class="box">
+  <div class="box has-text-centered">
     <router-link :to="'/szczegoly/' + product.name">
       <div>
-        <figure class="image" style="height: 210px; width: 200px">
+        <figure
+          class="image is-inline-block"
+          style="height: 210px; width: 200px"
+        >
           <img
             style="max-height: 200px"
             :src="
