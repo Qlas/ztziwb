@@ -20,6 +20,21 @@
               </div>
               <div class="tile is-6">
                 <div class="tile is-vertical is-12">
+                  <div class="panel-block is-justify-content-space-between">
+                    <div class="is-pulled-left">
+                      <strong class="bold">Cena:</strong>
+                    </div>
+                    <div class="is-pulled-right">{{ product.price }}</div>
+                  </div>
+
+                  <div class="panel-block is-justify-content-space-between">
+                    <div class="is-pulled-left">
+                      <strong class="bold">Dostępność:</strong>
+                    </div>
+                    <div class="is-pulled-right">{{ product.quantity }}</div>
+                  </div>
+                  <br />
+
                   <div style="width: 40%; margin-left: 210px">
                     <b-field>
                       <b-numberinput
@@ -40,23 +55,12 @@
                       </p>
                     </b-field>
                   </div>
-                  <div class="panel-block is-justify-content-space-between">
-                    <div class="is-pulled-left">
-                      <strong class="bold">Cena:</strong>
-                    </div>
-                    <div class="is-pulled-right">{{ product.price }}</div>
-                  </div>
-
-                  <div class="panel-block is-justify-content-space-between">
-                    <div class="is-pulled-left">
-                      <strong class="bold">Dostępność:</strong>
-                    </div>
-                    <div class="is-pulled-right">{{ product.quantity }}</div>
-                  </div>
-                  <br />
                   <strong class="bold has-text-centered">Opis:</strong>
 
-                  <div class="is-pulled-right">{{ product.description }}</div>
+                  <div
+                    class="is-pulled-right"
+                    v-html="product.description"
+                  ></div>
                 </div>
               </div>
             </div>
