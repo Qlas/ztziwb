@@ -75,7 +75,7 @@ export default {
     },
     removeClicked(id) {
       this.removeCategory(id).then(() => {
-        this.getCategories();
+        this.getCategories({ show_main: false });
       });
     },
   },

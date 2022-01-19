@@ -109,7 +109,7 @@ export default {
       processFormAction(requestData)
         .then(() => {
           this.$parent.close();
-          this.getProducts();
+          this.getCategories({ show_main: false });
           this.$buefy.toast.open({
             message: toastMessage,
             position: "is-top",
