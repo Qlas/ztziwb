@@ -2,8 +2,9 @@
   <div class="box">
     <router-link :to="'/szczegoly/' + product.name">
       <div>
-        <figure class="image" style="height: 210px">
+        <figure class="image" style="height: 210px; width: 200px">
           <img
+            style="max-height: 200px"
             :src="
               product.image
                 ? product.image
