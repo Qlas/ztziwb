@@ -51,7 +51,7 @@
                         expanded
                         controls-position="compact"
                         controls-alignment="left"
-                        min="0"
+                        min="1"
                         :max="product.quantity"
                         :disabled="product.quantity === 0"
                         v-model="quantity"
