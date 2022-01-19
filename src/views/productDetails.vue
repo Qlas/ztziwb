@@ -33,11 +33,11 @@
                     </div>
                     <div class="is-pulled-right">
                       {{
-                        product.quantity > 50
+                        product.quantity >= 50
                           ? "duża"
-                          : product.quantity > 25
+                          : product.quantity >= 25
                           ? "średnia"
-                          : product.quantity > 1
+                          : product.quantity >= 1
                           ? "na wyczerpaniu"
                           : "brak w magazynie"
                       }}
