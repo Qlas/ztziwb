@@ -31,7 +31,17 @@
                     <div class="is-pulled-left">
                       <strong class="bold">Dostępność:</strong>
                     </div>
-                    <div class="is-pulled-right">{{ product.quantity }}</div>
+                    <div class="is-pulled-right">
+                      {{
+                        product.quantity > 50
+                          ? "duża"
+                          : product.quantity > 25
+                          ? "średnia"
+                          : product.quantity > 1
+                          ? "na wyczerpaniu"
+                          : "brak w magazynie"
+                      }}
+                    </div>
                   </div>
                   <br />
 
