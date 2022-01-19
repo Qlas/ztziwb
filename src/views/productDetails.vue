@@ -2,7 +2,7 @@
   <div class="tl-reservation-dashboard container">
     <div class="tile is-ancestor">
       <div class="tile is-vertical">
-        <div class="box tile is-12">
+        <div class="box tile is-12" v-if="!loading">
           <div class="tile is-vertical">
             <div class="title has-text-centered">{{ product.name }}</div>
             <div class="tile is-ancestor">
@@ -92,6 +92,7 @@ export default {
     return {
       product: {},
       quantity: 1,
+      loading: true,
     };
   },
 
@@ -145,7 +146,9 @@ export default {
   },
 
   created() {
-    this.getProducts();
+    this.getProducts().then(() => {
+      this.loading = false;
+    });
   },
 };
 </script>
