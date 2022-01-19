@@ -63,41 +63,46 @@
             >
               Twój koszyk jest pusty
             </div>
-            <div
-              v-for="cart_product in cart.cart_product"
-              :key="cart_product.id"
-              class="box"
-            >
-              <div>
-                <div class="columns">
-                  <div
-                    class="column is-2"
-                    style="display: flex; align-items: center"
-                  >
-                    <figure class="image">
-                      <img :src="cart_product.image" alt="Placeholder image" />
-                    </figure>
-                  </div>
-                  <div
-                    class="column"
-                    style="display: flex; align-items: center"
-                  >
-                    <p class="title is-6">{{ cart_product.product }}</p>
-                  </div>
-                  <div
-                    class="column is-2"
-                    style="display: flex; align-items: center"
-                  >
-                    <p class="title is-6">{{ cart_product.quantity }}</p>
-                  </div>
-                  <div
-                    class="column is-2"
-                    style="display: flex; align-items: center"
-                  >
-                    <b-button
-                      @click="() => removeButtonClicked(cart_product.product)"
-                      >Usuń</b-button
+            <div v-else>
+              <div
+                v-for="cart_product in cart.cart_product"
+                :key="cart_product.id"
+                class="box"
+              >
+                <div>
+                  <div class="columns">
+                    <div
+                      class="column is-2"
+                      style="display: flex; align-items: center"
                     >
+                      <figure class="image">
+                        <img
+                          :src="cart_product.image"
+                          alt="Placeholder image"
+                        />
+                      </figure>
+                    </div>
+                    <div
+                      class="column"
+                      style="display: flex; align-items: center"
+                    >
+                      <p class="title is-6">{{ cart_product.product }}</p>
+                    </div>
+                    <div
+                      class="column is-2"
+                      style="display: flex; align-items: center"
+                    >
+                      <p class="title is-6">{{ cart_product.quantity }}</p>
+                    </div>
+                    <div
+                      class="column is-2"
+                      style="display: flex; align-items: center"
+                    >
+                      <b-button
+                        @click="() => removeButtonClicked(cart_product.product)"
+                        >Usuń</b-button
+                      >
+                    </div>
                   </div>
                 </div>
               </div>

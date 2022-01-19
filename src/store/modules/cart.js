@@ -72,8 +72,10 @@ const mutations = {
   setCart(state, results) {
     state.cart = results[0];
     var cartValue = 0;
-    for (let result of results[0].cart_product) {
-      cartValue += result.price * result.quantity;
+    if (results[0] && results[0].cart_product) {
+      for (let result of results[0].cart_product) {
+        cartValue += result.price * result.quantity;
+      }
     }
     if (cartValue > 300) {
       state.delivery = 0;
