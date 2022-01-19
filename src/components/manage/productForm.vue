@@ -25,7 +25,7 @@
             v-model="description"
             placeholder="Wpisz opis produktu"
             type="textarea"
-            maxlength="512"
+            maxlength="2000"
             :validation="{ name: 'Opis', rules: 'required' }"
             :field="{ label: 'Opis', expanded: true }"
           />
