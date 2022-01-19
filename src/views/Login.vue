@@ -57,6 +57,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["getTokenPair"]),
+    ...mapActions("cart", ["getCart"]),
 
     login() {
       this.getTokenPair({
@@ -64,6 +65,7 @@ export default {
         password: this.password,
       })
         .then(() => {
+          this.getCart();
           this.$router.push("/");
           this.$buefy.notification.open({
             duration: 8000,
