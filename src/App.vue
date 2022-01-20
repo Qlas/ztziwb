@@ -58,8 +58,7 @@ import Footer from "@/components/layout/Footer.vue";
 export default {
   name: "Home",
   metaInfo: {
-    title: "Default App Title",
-    titleTemplate: "%s | vue-meta Example App",
+    title: "Dzianiny24",
     htmlAttrs: {
       lang: "en-US",
     },
@@ -149,5 +148,3 @@ $link-focus-border: $primary;
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
 </style>
-
-
