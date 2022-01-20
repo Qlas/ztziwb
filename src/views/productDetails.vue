@@ -45,7 +45,10 @@
                   </div>
                   <br />
 
-                  <div style="width: 40%; margin-left: 210px">
+                  <div
+                    style="width: 40%; margin-left: 210px"
+                    v-if="isAuthenticated"
+                  >
                     <b-field>
                       <b-numberinput
                         expanded
@@ -105,6 +108,7 @@ export default {
 
   computed: {
     ...mapGetters("product", ["products"]),
+    ...mapGetters("auth", ["isAuthenticated"]),
   },
 
   methods: {

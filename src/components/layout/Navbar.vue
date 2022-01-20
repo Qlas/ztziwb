@@ -76,42 +76,46 @@
                 :key="cart_product.id"
                 class="box"
               >
-                <div>
-                  <div class="columns">
-                    <div
-                      class="column is-2"
-                      style="display: flex; align-items: center"
-                    >
-                      <figure class="image">
-                        <img
-                          :src="cart_product.image"
-                          alt="Placeholder image"
-                        />
-                      </figure>
-                    </div>
-                    <div
-                      class="column"
-                      style="display: flex; align-items: center"
-                    >
-                      <p class="title is-6">{{ cart_product.product }}</p>
-                    </div>
-                    <div
-                      class="column is-2"
-                      style="display: flex; align-items: center"
-                    >
-                      <p class="title is-6">{{ cart_product.quantity }}</p>
-                    </div>
-                    <div
-                      class="column is-2"
-                      style="display: flex; align-items: center"
-                    >
-                      <b-button
-                        @click="() => removeButtonClicked(cart_product.product)"
-                        >Usuń</b-button
+                <router-link :to="'/szczegoly/' + cart_product.product">
+                  <div>
+                    <div class="columns">
+                      <div
+                        class="column is-2"
+                        style="display: flex; align-items: center"
                       >
+                        <figure class="image">
+                          <img
+                            :src="cart_product.image"
+                            alt="Placeholder image"
+                          />
+                        </figure>
+                      </div>
+                      <div
+                        class="column"
+                        style="display: flex; align-items: center"
+                      >
+                        <p class="title is-6">{{ cart_product.product }}</p>
+                      </div>
+                      <div
+                        class="column is-2"
+                        style="display: flex; align-items: center"
+                      >
+                        <p class="title is-6">{{ cart_product.quantity }}</p>
+                      </div>
+                      <div
+                        class="column is-2"
+                        style="display: flex; align-items: center"
+                      >
+                        <b-button
+                          @click="
+                            () => removeButtonClicked(cart_product.product)
+                          "
+                          >Usuń</b-button
+                        >
+                      </div>
                     </div>
                   </div>
-                </div>
+                </router-link>
               </div>
             </div>
             <b-button class="is-secondary mt-4" tag="router-link" to="/koszyk"

@@ -21,7 +21,9 @@
                 />
               </div>
               <div class="media-content">
-                <p class="title is-4">{{ cart_product.product }}</p>
+                <router-link :to="'/szczegoly/' + cart_product.product">
+                  <p class="title is-4">{{ cart_product.product }}</p>
+                </router-link>
                 <p class="subtitle is-6">{{ padInt(cart_product.price) }}</p>
               </div>
             </div>
