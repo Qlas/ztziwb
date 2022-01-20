@@ -68,6 +68,7 @@
         :arrow="true"
         :arrow-hover="false"
         :items-to-show="3"
+        v-if="!loading"
       >
         <template #item="list">
           <productBox :product="list" />
@@ -93,6 +94,7 @@ export default {
       hash: process.env.VUE_APP_GIT_HASH,
       tag: process.env.VUE_APP_GIT_TAG,
       tag_distance: process.env.VUE_APP_GIT_DISTANCE,
+      loading: true,
     };
   },
 
@@ -101,7 +103,9 @@ export default {
   },
   mounted() {
     this.showElements = true;
-    this.getProducts({ latest: true });
+    this.getProducts({ latest: true }).then(() => {
+      this.loading = false;
+    });
   },
 };
 </script>

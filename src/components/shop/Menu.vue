@@ -1,7 +1,7 @@
 <template>
   <article class="tile is-child box">
     <b-menu class="is-custom-mobile">
-      <b-menu-list label="Menu">
+      <b-menu-list label="Menu" v-if="!loading">
         <MenuItem
           :item="item"
           v-for="(item, index) in categories"
@@ -26,6 +26,7 @@ export default {
       email: "",
       purpose: "",
       topic: "",
+      loading: true,
     };
   },
 
@@ -38,7 +39,9 @@ export default {
   },
 
   created() {
-    this.getCategories();
+    this.getCategories().then(() => {
+      this.loading = false;
+    });
   },
 };
 </script>

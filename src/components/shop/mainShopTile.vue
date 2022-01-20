@@ -1,6 +1,6 @@
 <template>
   <article class="tile is-vertical box">
-    <div class="tile is-parent" v-for="row in chunkedArr">
+    <div class="tile is-parent" v-for="row in chunkedArr" v-if="!loading">
       <div
         class="tile is-parent is-4 pr-1 pl-1 pb-1 pt-1"
         v-for="(item, index) in row"
@@ -27,6 +27,7 @@ export default {
       email: "",
       purpose: "",
       topic: "",
+      loading: true,
     };
   },
 
@@ -55,7 +56,9 @@ export default {
   },
 
   created() {
-    this.getProducts();
+    this.getProducts().then(() => {
+      this.loading = false;
+    });
   },
 };
 </script>
